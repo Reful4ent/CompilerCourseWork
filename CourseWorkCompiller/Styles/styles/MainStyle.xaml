@@ -1,0 +1,24 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="RoundedButton" TargetType="Button">
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="5"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    
+    <Style x:Key="NoBorderButton" TargetType="Button">
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0px"/>
+    </Style>
+    
+    <Style x:Key="BorderedTextBlock" TargetType="TextBlock">
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="BorderThickness" Value="5px"/>
+                <Setter Property="BorderBrush" Value="Black"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+</ResourceDictionary>

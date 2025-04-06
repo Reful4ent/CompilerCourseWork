@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Справка</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+        }
+        .nav {
+            display: flex;
+            justify-content: left;
+            background-color: #555555;
+        }
+
+        .ul-nav {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .li-item-nav {
+            color: white;
+            cursor: pointer; 
+            padding: 20px 30px 20px 30px;
+        }
+
+        .li-item-nav:first-child {
+            cursor: default;
+        }
+        .li-item-nav:first-child:hover {
+            background-color: #555555;
+        }
+        
+        .li-item-nav:hover {
+            background-color: #04aa6d;
+        }
+
+        .mainInfoContainer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <nav class="nav">
+        <ul class="ul-nav">
+            <li class="li-item-nav">ToFLaC Справка</li>
+            <li onclick="checkMe('panelControl')" class="li-item-nav">Панель управления</li>
+            <li onclick="checkMe('menuFile')" class="li-item-nav">Пункт меню "Файл"</li>
+            <li onclick="checkMe('menuPravka')" class="li-item-nav">Пункт меню "Правка"</li>
+        </ul>
+    </nav>
+    <div class="mainInfoContainer">
+
+    </div>
+</main>
+<script>
+    function checkMe(type) {
+        const container = document.querySelector(".mainInfoContainer");
+        container.innerHTML = '';
+        switch (type) {
+            case 'panelControl':
+                container.innerHTML += 
+                    `<div>
+                        <img src="../Styles/IMG/ImageForControl1.png">
+                        <ol>
+                            <li>
+                                Cоздать файл
+                                <div>
+                                    - При нажатии на кнопку "Создать" откроется диалоговое окно с предупреждением, при согласии будет создан новый файл, чтобы он сохранился в системе необходимо нажать кнопку 3 - "Сохранить"  
+                                </div>
+                            </li>
+                            <li>
+                                Открыть файл
+                            </li>
+                            <li>
+                                Сохранить файл
+                            </li>
+                            <li>
+                                Отменить
+                                <div>
+                                    - При нажатии на кнопку "Отменить" происходит возвращение к предыдущему шагу (CTRL + Z)
+                                </div>
+                            </li>
+                            <li>
+                                Вернуть
+                                <div>
+                                    - При нажатии на кнопку "Отменить" происходит шаг вперед (CTRL + Y)
+                                </div>
+                            </li>
+                            <li>
+                                Копировать
+                            </li>
+                            <li>
+                                Вырезать
+                            </li>
+                            <li>
+                                Вставить
+                            </li>
+                            <li>
+                                Пуск
+                            </li>
+                             <li>
+                                Вызов справки
+                            </li>
+                        </ol>
+                    </div>`
+                break;
+            case 'menuFile':
+                    container.innerHTML += 
+                    `<div style="display: flex; flex-direction: column">
+                        <img src="../Styles/IMG/ImageForControl2.png" style="margin-bottom: 10px; margin-left: 20px; align-self: center">
+                        <div style="margin-bottom: 10px;  margin-left: 20px">
+                            - При работе с файлом, всегда будет возникать диалоговое окно, предлагающее выбор, при согласии выполняется работа с файлом, иначе диалоговое окно будет закрыто и никакие действия не будут выполнены
+                        </div>
+                        <img src="../Styles/IMG/ImageForControl3.png" style="margin-bottom: 10px;  margin-left: 20px; height: 15%; width: 30%; align-self: center">
+                        <div style="margin-bottom: 10px;  margin-left: 20px">
+                            - Если в диалоговом окне было дано согласие, то откроется проводник для дальнейшей работы с файлом
+                        </div>
+                    </div>`
+                break;
+            case 'menuPravka':
+                container.innerHTML +=
+                    `<div style="display: flex; flex-direction: column">
+                        <img src="../Styles/IMG/ImageForControl4.png" style="margin-bottom: 10px; margin-left: 20px; align-self: center">
+                        <div style="margin-bottom: 10px;  margin-left: 20px">
+                            - В пункте меню "Правка" представлены стандартные инструменты для работы с текстом
+                        </div>
+                    </div>`
+                break;
+        }
+    }
+</script>
+</body>
+</html>
