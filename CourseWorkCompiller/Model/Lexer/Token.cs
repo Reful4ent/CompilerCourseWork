@@ -6,7 +6,7 @@ public class Token
 {
     public static Dictionary<string, (string token, TokenTypeEnum tokenType)> tokens = new Dictionary<string, (string, TokenTypeEnum)>
     {
-        { @", ", ("COMMA_SPACE", TokenTypeEnum.CommaSpace) },
+        { @",", ("COMMA", TokenTypeEnum.Comma) },
         { @"\bint\b", ("INT", TokenTypeEnum.Int) },
         { @"\bchar\b", ("CHAR", TokenTypeEnum.Char) },
         { @"\bvoid\b", ("VOID", TokenTypeEnum.Void) },

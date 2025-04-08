@@ -139,6 +139,11 @@ partial class OneListTokenRecursiveParser
         }
         
         currentPosition = skipNotValid(currentPosition, errors);
+        if (tokensList[currentPosition].Code == TokenTypeEnum.OpenParenthesis && tokensList[currentPosition + 1].Code == TokenTypeEnum.Semicolon)
+        {
+            errors.Add(new ErrorToken("Вставить лексему: ')'", tokensList[currentPosition].Line, currentPosition, ErrorTokenType.PUSH));
+            return semicolon(currentPosition + 1, errors);
+        }
         if (tokensList[currentPosition].Code != TokenTypeEnum.OpenParenthesis)
         {
             return GetMinErrorList(
@@ -167,6 +172,9 @@ partial class OneListTokenRecursiveParser
                    tokensList[currentPosition].Code == TokenTypeEnum.Void)
         {
             return spaceAfterArgType(currentPosition + 1, errors);
+        } else if ((currentPosition + 1) < tokensList.Count && tokensList[currentPosition].Code == TokenTypeEnum.Identifier && tokensList[currentPosition + 1].Code != TokenTypeEnum.Semicolon)
+        {
+            return argType(currentPosition, errors);
         }
 
         return GetMinErrorList(
@@ -256,17 +264,31 @@ partial class OneListTokenRecursiveParser
         {
             return errors;
         }
-
-        if (tokensList[currentPosition].Code == TokenTypeEnum.CommaSpace)
+        
+        if (tokensList[currentPosition].Code == TokenTypeEnum.Comma)
         {
-            return argType(currentPosition + 1, errors);
-        } else if (tokensList[currentPosition].Code == TokenTypeEnum.CloseParenthesis)
+            return spaceComma(currentPosition + 1, errors);
+        }
+        else if(tokensList[currentPosition].Code == TokenTypeEnum.Int ||
+                tokensList[currentPosition].Code == TokenTypeEnum.Char ||
+                tokensList[currentPosition].Code == TokenTypeEnum.Float ||
+                tokensList[currentPosition].Code == TokenTypeEnum.Void)
+        {
+            return spaceAfterArgType(currentPosition + 1, errors);
+        }
+        else if (tokensList[currentPosition].Code == TokenTypeEnum.CloseParenthesis)
         {
             return semicolon(currentPosition + 1, errors);
         }
-        if (tokensList[currentPosition].Code == TokenTypeEnum.Space)
+        if (tokensList[currentPosition].Code == TokenTypeEnum.Space || tokensList[currentPosition].Code == TokenTypeEnum.Invalid)
         {
-            return commaSpace(currentPosition + 1, errors);
+            return comma(currentPosition, errors);
+        }
+
+        if (tokensList[currentPosition].Code == TokenTypeEnum.Semicolon)
+        {
+            errors.Add(new ErrorToken("Вставить лексему: ')'", tokensList[currentPosition].Line, currentPosition, ErrorTokenType.PUSH));
+            return semicolon(currentPosition, errors);
         }
 
         return GetMinErrorList(
@@ -275,23 +297,48 @@ partial class OneListTokenRecursiveParser
             nextAfterArgName(currentPosition + 1, CreateErrorList(currentPosition, TokenTypeEnum.CloseParenthesis, ErrorTokenType.DELETE, errors, tokensList[currentPosition].Line))
             );
     }
+    
 
-    private List<ErrorToken> commaSpace(int currentPosition, List<ErrorToken> errors)
+    private List<ErrorToken> comma(int currentPosition, List<ErrorToken> errors)
     {
         if (currentPosition >= tokensList.Count)
         {
             return errors;
         }
         
-        if (tokensList[currentPosition].Code == TokenTypeEnum.CommaSpace)
+        if (currentPosition + 1 < tokensList.Count && tokensList[currentPosition + 1].Code == TokenTypeEnum.CloseParenthesis && tokensList[currentPosition].Code == TokenTypeEnum.Space)
+        {
+            return nextAfterArgName(currentPosition + 1, errors);
+        }
+        
+        if (tokensList[currentPosition].Code == TokenTypeEnum.Comma)
+        {
+            return spaceComma(currentPosition + 1, errors);
+        }
+        
+        return GetMinErrorList(
+            spaceComma(currentPosition, CreateErrorList(currentPosition, TokenTypeEnum.Comma, ErrorTokenType.PUSH, errors, tokensList[currentPosition].Line)),
+            spaceComma(currentPosition + 1, CreateErrorList(currentPosition, TokenTypeEnum.Comma, ErrorTokenType.REPLACE, errors, tokensList[currentPosition].Line)),
+            comma(currentPosition + 1, CreateErrorList(currentPosition, TokenTypeEnum.Comma, ErrorTokenType.DELETE, errors, tokensList[currentPosition].Line))
+        );
+    }
+
+    private List<ErrorToken> spaceComma(int currentPosition, List<ErrorToken> errors)
+    {
+        if (currentPosition >= tokensList.Count)
+        {
+            return errors;
+        }
+        
+        if (tokensList[currentPosition].Code == TokenTypeEnum.Space)
         {
             return argType(currentPosition + 1, errors);
         }
         
         return GetMinErrorList(
-            argType(currentPosition, CreateErrorList(currentPosition, TokenTypeEnum.CommaSpace, ErrorTokenType.PUSH, errors, tokensList[currentPosition].Line)),
-            argType(currentPosition + 1, CreateErrorList(currentPosition, TokenTypeEnum.CommaSpace, ErrorTokenType.REPLACE, errors, tokensList[currentPosition].Line)),
-            commaSpace(currentPosition + 1, CreateErrorList(currentPosition, TokenTypeEnum.CommaSpace, ErrorTokenType.DELETE, errors, tokensList[currentPosition].Line))
+            argType(currentPosition, CreateErrorList(currentPosition, TokenTypeEnum.Space, ErrorTokenType.PUSH, errors, tokensList[currentPosition].Line)),
+            argType(currentPosition + 1, CreateErrorList(currentPosition, TokenTypeEnum.Space, ErrorTokenType.REPLACE, errors, tokensList[currentPosition].Line)),
+            spaceComma(currentPosition + 1, CreateErrorList(currentPosition, TokenTypeEnum.Space, ErrorTokenType.DELETE, errors, tokensList[currentPosition].Line))
         );
     }
 
@@ -303,6 +350,10 @@ partial class OneListTokenRecursiveParser
         }
         
         currentPosition = skipNotValid(currentPosition, errors);
+        if (currentPosition >= tokensList.Count)
+        {
+            return errors;
+        }
         if (tokensList[currentPosition].Code == TokenTypeEnum.Int ||
             tokensList[currentPosition].Code == TokenTypeEnum.Char ||
             tokensList[currentPosition].Code == TokenTypeEnum.Float ||
@@ -313,7 +364,7 @@ partial class OneListTokenRecursiveParser
 
         return GetMinErrorList(
             spaceAfterArgType(currentPosition, CreateErrorListType(currentPosition, ErrorTokenType.PUSH, errors, tokensList[currentPosition].Line)),
-            spaceAfterTypeFunc(currentPosition + 1, CreateErrorListType(currentPosition, ErrorTokenType.REPLACE, errors, tokensList[currentPosition].Line)),
+            spaceAfterArgType(currentPosition + 1, CreateErrorListType(currentPosition, ErrorTokenType.REPLACE, errors, tokensList[currentPosition].Line)),
             argType(currentPosition + 1, CreateErrorListType(currentPosition, ErrorTokenType.DELETE, errors, tokensList[currentPosition].Line))
         );
     }
@@ -362,10 +413,10 @@ partial class OneListTokenRecursiveParser
         switch (errorType)
         {
             case ErrorTokenType.PUSH:
-                errorMessage = $"Вставить лексему: '{TokenTypeEnum.Char}' или '{TokenTypeEnum.Int}' или '{TokenTypeEnum.Float}' или '{TokenTypeEnum.Void}'";
+                errorMessage = $"Вставить лексему:  'char' или 'int' или 'float' или 'void'";
                 break;
             case ErrorTokenType.REPLACE:
-                errorMessage = $"Заменить лексему: {tokensList[currentPosition].Term} на лексему: '{TokenTypeEnum.Char}' или '{TokenTypeEnum.Int}' или '{TokenTypeEnum.Float}' или '{TokenTypeEnum.Void}'";
+                errorMessage = $"Заменить лексему: {tokensList[currentPosition].Term} на лексему: 'char' или 'int' или 'float' или 'void'";
                 break;
             case ErrorTokenType.DELETE:
                 errorMessage = $"Удалить недопустимый символ '{tokensList[currentPosition].Term}'";
@@ -377,13 +428,23 @@ partial class OneListTokenRecursiveParser
     private string CreateErrorMessage(TokenTypeEnum type, ErrorTokenType errorType, int currentPosition)
     {
         string errorMessage = string.Empty;
+        string lexeme;
+        if (type == TokenTypeEnum.Identifier)
+        {
+            lexeme = type.ToString();
+        }
+        else
+        {
+            lexeme = Lexemes.getLexemes(type);
+        }
+        
         switch (errorType)
         {
            case ErrorTokenType.PUSH:
-               errorMessage = $"Вставить лексему: {type}";
+               errorMessage = $"Вставить лексему: '{lexeme}'";
                break;
            case ErrorTokenType.REPLACE:
-               errorMessage = $"Заменить лексему: {tokensList[currentPosition].Term} на лексему: {type}";
+               errorMessage = $"Заменить лексему: '{tokensList[currentPosition].Term}' на лексему: '{lexeme}'";
                break;
            case ErrorTokenType.DELETE:
                errorMessage = $"Удалить недопустимый символ '{tokensList[currentPosition].Term}'";

@@ -5,7 +5,7 @@ namespace CourseWorkCompiller.Model;
 
 public class Lexer
 {
-    string pattern = @"\bint\b|\bchar\b|\bvoid\b|\bfloat\b|;| |\( |\)|, |[a-zA-Z][a-zA-Z0-9]*|[^\s]|, ";
+    string pattern = @"\bint\b|\bchar\b|\bvoid\b|\bfloat\b|;| |\( |\)|,|[a-zA-Z][a-zA-Z0-9]*|[^\s]";
     public List<Token> GetLexemes(string text)
     {
         List<string> strings = text.Split('\n').ToList();
@@ -42,7 +42,7 @@ public class Lexer
                     case ")":
                         tokens.Add(new Token(i+1, match.Index, match.Length + match.Index, $"Найдена закрывающая скобка: '{match.Value}'", match.Value));
                         break;
-                    case ", ":
+                    case ",":
                         tokens.Add(new Token(i+1, match.Index, match.Length + match.Index, $"Найден разделитель аргументов: '{match.Value}'", match.Value));
                         break;
                     default:

@@ -10,7 +10,7 @@ public enum TokenTypeEnum
     Space = 6,
     OpenParenthesis = 7,
     CloseParenthesis = 8,
-    CommaSpace = 9,
+    Comma = 9,
     Semicolon = 10,
     Invalid = 11,
 }
