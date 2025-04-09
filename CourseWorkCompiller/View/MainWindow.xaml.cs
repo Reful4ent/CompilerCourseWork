@@ -240,4 +240,148 @@ public partial class MainWindow : Window
     {
         codeBox.Redo();
     }
+
+    private void Task_OnClick(object sender, RoutedEventArgs e)
+    {
+        string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+        string fullPath = Path.Combine(projectDirectory, "View", "Task.html");
+
+
+        if (File.Exists(fullPath))
+        {
+            HelpWindow helpWindow = new HelpWindow(fullPath);
+            helpWindow.ShowDialog();
+        }
+        else
+        {
+            MessageBox.Show($"Файл не найден: {fullPath}");
+        }
+    }
+
+    private void Grammar_OnClick(object sender, RoutedEventArgs e)
+    {
+        string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+        string fullPath = Path.Combine(projectDirectory, "View", "Grammar.html");
+
+
+        if (File.Exists(fullPath))
+        {
+            HelpWindow helpWindow = new HelpWindow(fullPath);
+            helpWindow.ShowDialog();
+        }
+        else
+        {
+            MessageBox.Show($"Файл не найден: {fullPath}");
+        }
+    }
+
+    private void Homsk_OnClick(object sender, RoutedEventArgs e)
+    {
+        string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+        string fullPath = Path.Combine(projectDirectory, "View", "Homsk.html");
+
+
+        if (File.Exists(fullPath))
+        {
+            HelpWindow helpWindow = new HelpWindow(fullPath);
+            helpWindow.ShowDialog();
+        }
+        else
+        {
+            MessageBox.Show($"Файл не найден: {fullPath}");
+        }
+    }
+
+    private void Analysis_OnClick(object sender, RoutedEventArgs e)
+    {
+        string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+        string fullPath = Path.Combine(projectDirectory, "View", "Analysis.html");
+
+
+        if (File.Exists(fullPath))
+        {
+            HelpWindow helpWindow = new HelpWindow(fullPath);
+            helpWindow.ShowDialog();
+        }
+        else
+        {
+            MessageBox.Show($"Файл не найден: {fullPath}");
+        }
+    }
+
+    private void Diagnosis_OnClick(object sender, RoutedEventArgs e)
+    {
+        string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+        string fullPath = Path.Combine(projectDirectory, "View", "Diagnosis.html");
+
+
+        if (File.Exists(fullPath))
+        {
+            HelpWindow helpWindow = new HelpWindow(fullPath);
+            helpWindow.ShowDialog();
+        }
+        else
+        {
+            MessageBox.Show($"Файл не найден: {fullPath}");
+        }
+    }
+
+    private void Test_OnClick(object sender, RoutedEventArgs e)
+    {
+        string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+        string fullPath = Path.Combine(projectDirectory, "View", "Test.html");
+
+
+        if (File.Exists(fullPath))
+        {
+            HelpWindow helpWindow = new HelpWindow(fullPath);
+            helpWindow.ShowDialog();
+        }
+        else
+        {
+            MessageBox.Show($"Файл не найден: {fullPath}");
+        }
+    }
+
+    private void Literature_OnClick(object sender, RoutedEventArgs e)
+    {
+        string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+        string fullPath = Path.Combine(projectDirectory, "View", "Literature.html");
+
+
+        if (File.Exists(fullPath))
+        {
+            HelpWindow helpWindow = new HelpWindow(fullPath);
+            helpWindow.ShowDialog();
+        }
+        else
+        {
+            MessageBox.Show($"Файл не найден: {fullPath}");
+        }
+    }
+
+    private void Code_OnClick(object sender, RoutedEventArgs e)
+    {
+        string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+        string fullPath = Path.Combine(projectDirectory, "View", "CodeProgram.html");
+
+
+        if (File.Exists(fullPath))
+        {
+            HelpWindow helpWindow = new HelpWindow(fullPath);
+            helpWindow.ShowDialog();
+        }
+        else
+        {
+            MessageBox.Show($"Файл не найден: {fullPath}");
+        }
+    }
 }

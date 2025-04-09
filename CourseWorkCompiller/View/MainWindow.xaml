@@ -13,44 +13,44 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="21px"/>
+            <RowDefinition Height="36px"/>
             <RowDefinition Height="40px"/>
             <RowDefinition Height="0.4*"/>
             <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
-            <MenuItem Header="Файл"  Padding="5 2 5 0">
-                <MenuItem Header="Создать" Click="ButtonCreate_OnClick"/>
-                <MenuItem Header="Открыть" Click="ButtonOpen_OnClick"/>
-                <MenuItem Header="Сохранить" Click="ButtonSave_OnClick"/>
-                <MenuItem Header="Сохранить как" Click="ButtonSaveAs_OnClick"/>
-                <MenuItem Header="Выход" Click="MenuExit_OnClick"/>
+            <MenuItem Header="Файл"  Padding="5 2 5 0" FontSize="24">
+                <MenuItem Header="Создать" Click="ButtonCreate_OnClick" FontSize="24"/>
+                <MenuItem Header="Открыть" Click="ButtonOpen_OnClick" FontSize="24"/>
+                <MenuItem Header="Сохранить" Click="ButtonSave_OnClick" FontSize="24"/>
+                <MenuItem Header="Сохранить как" Click="ButtonSaveAs_OnClick" FontSize="24"/>
+                <MenuItem Header="Выход" Click="MenuExit_OnClick" FontSize="24"/>
             </MenuItem>
-            <MenuItem Header="Правка"  Padding="10 2 10 0 ">
-                <MenuItem Header="Отменить"/>
-                <MenuItem Header="Повторить"/>
-                <MenuItem Header="Вырезать" Click="ButtonCut_OnClick"/>
-                <MenuItem Header="Копировать" Click="ButtonCopy_OnClick"/>
-                <MenuItem Header="Вставить" Click="ButtonInsert_OnClick"/>
-                <MenuItem Header="Удалить" Click="MenuDelete_OnClick"/>
-                <MenuItem Header="Выделить все" Click="MenuSelect_OnClick"/>
+            <MenuItem Header="Правка"  Padding="10 2 10 0 " FontSize="24">
+                <MenuItem Header="Отменить" FontSize="24"/>
+                <MenuItem Header="Повторить" FontSize="24"/>
+                <MenuItem Header="Вырезать" Click="ButtonCut_OnClick" FontSize="24"/>
+                <MenuItem Header="Копировать" Click="ButtonCopy_OnClick" FontSize="24"/>
+                <MenuItem Header="Вставить" Click="ButtonInsert_OnClick" FontSize="24"/>
+                <MenuItem Header="Удалить" Click="MenuDelete_OnClick" FontSize="24"/>
+                <MenuItem Header="Выделить все" Click="MenuSelect_OnClick" FontSize="24"/>
             </MenuItem>
-            <MenuItem Header="Текст"  Padding="10 2 10 0 ">
-                <MenuItem Header="Постановка задачи"/>
-                <MenuItem Header="Грамматика"/>
-                <MenuItem Header="Классификация грамматики"/>
-                <MenuItem Header="Метод анализа"/>
-                <MenuItem Header="Диагностика и нейтрализация ошибок"/>
-                <MenuItem Header="Тестовый пример"/>
-                <MenuItem Header="Список литературы"/>
-                <MenuItem Header="Исходный код программы"/>
+            <MenuItem Header="Текст"  Padding="10 2 10 0 " FontSize="24">
+                <MenuItem Header="Постановка задачи" FontSize="24" Click="Task_OnClick" />
+                <MenuItem Header="Грамматика" FontSize="24" Click="Grammar_OnClick"/>
+                <MenuItem Header="Классификация грамматики" FontSize="24" Click="Homsk_OnClick"/>
+                <MenuItem Header="Метод анализа" FontSize="24" Click="Analysis_OnClick"/>
+                <MenuItem Header="Диагностика и нейтрализация ошибок" FontSize="24" Click="Diagnosis_OnClick"/>
+                <MenuItem Header="Тестовый пример" FontSize="24" Click="Test_OnClick"/>
+                <MenuItem Header="Список литературы" FontSize="24" Click="Literature_OnClick"/>
+                <MenuItem Header="Исходный код программы" FontSize="24" Click="Code_OnClick"/>
             </MenuItem>
             <Button Width="15px" Height="15px" Margin="2 0 2 0" Background="Transparent" Style="{StaticResource NoBorderButton}" BorderThickness="0">
                 <Image Source="../Styles/IMG/playGreen.png"/>
             </Button>
-            <MenuItem Header="Справка"  Padding="10 2 10 0 ">
-                <MenuItem Header="Вызов справки" Click="MenuHelp_OnClick"/>
-                <MenuItem Header="О программе" Click="MenuAboutProgram_OnClick"/>
+            <MenuItem Header="Справка"  Padding="10 2 10 0 " FontSize="24">
+                <MenuItem Header="Вызов справки" Click="MenuHelp_OnClick" FontSize="24"/>
+                <MenuItem Header="О программе" Click="MenuAboutProgram_OnClick" FontSize="24"/>
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1" Margin="20 0 20 0">
@@ -127,7 +127,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Hidden" x:Name="textBlockScrollViewer" ScrollChanged="TextBlockScrollViewer_ScrollChanged" >
-                    <TextBlock Text="{Binding IndexesNumbers, UpdateSourceTrigger=PropertyChanged}" Background="#eaeaea" Padding="5px 0px 0px 0px" />
+                    <TextBlock Text="{Binding IndexesNumbers, UpdateSourceTrigger=PropertyChanged}" Background="#eaeaea" Padding="5px 0px 0px 0px" FontSize="24" />
                 </ScrollViewer>
                 <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" x:Name="textBoxScrollViewer" ScrollChanged="TextBoxScrollViewer_ScrollChanged">
                     <TextBox 
@@ -135,29 +135,31 @@
                         AcceptsReturn="True"
                         Text="{Binding EnteredCode,
                          UpdateSourceTrigger=PropertyChanged}"
+                        FontSize="24"
                         />
                 </ScrollViewer>
             </Grid>
         </Border>
         <Border Grid.Row="3" Margin="20 0 20 20" BorderBrush="Gray" BorderThickness="0.75px">
             <TabControl>
-                <TabItem Header="Парсер">
+                <TabItem Header="Парсер" FontSize="20">
                     <ScrollViewer>
                         <DataGrid
+                            FontSize="20"
                             Name="DataGridErrors"
                             ItemsSource="{Binding Errors}"
                             AutoGenerateColumns="False"
                             HeadersVisibility="Column"
                             >
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Строка" Binding="{Binding Path=Line}" Width="50" />
-                                <DataGridTextColumn Header="Индекс" Binding="{Binding Path=Index}" Width="50" />
-                                <DataGridTextColumn Header="Сообщение" Binding="{Binding Path=ErrorMessage}" Width="*" />
+                                <DataGridTextColumn Header="Строка" Binding="{Binding Path=Line}" Width="80" FontSize="24"/>
+                                <DataGridTextColumn Header="Индекс" Binding="{Binding Path=Index}" Width="80"  FontSize="24"/>
+                                <DataGridTextColumn Header="Сообщение" Binding="{Binding Path=ErrorMessage}" Width="*"  FontSize="24"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </ScrollViewer>
                 </TabItem>
-                <TabItem Header="Анализатор">
+                <TabItem Header="Анализатор" FontSize="20">
                     <ScrollViewer>
                         <DataGrid
                             Name="DataGridAnalyzer"

@@ -26,7 +26,6 @@ public class MainVM : BaseVM
         set
         {
             Set(ref enteredCode, value);
-            //Errors.Add(new Error(1, 1 ,1, "asddas"));
             
             UpdateIndexesNumbers(value);
         }
@@ -74,6 +73,8 @@ public class MainVM : BaseVM
     {
         EnteredCode = string.Empty;
         OutputText = string.Empty;
+        Errors = new ObservableCollection<ErrorToken>();
+        LexemesTokens = new ObservableCollection<Token>();
     }
 
     public Command StarScanCommand => Command.Create(StartScan);

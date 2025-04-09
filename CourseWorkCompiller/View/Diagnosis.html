@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <title>Справка</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+        }
+        .nav {
+            display: flex;
+            justify-content: left;
+            background-color: #555555;
+        }
+
+        .ul-nav {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .li-item-nav {
+            color: white;
+            cursor: pointer;
+            padding: 20px 30px 20px 30px;
+        }
+
+        .li-item-nav:first-child {
+            cursor: default;
+        }
+        .li-item-nav:first-child:hover {
+            background-color: #555555;
+        }
+
+        .li-item-nav:hover {
+            background-color: #04aa6d;
+        }
+
+        .mainInfoContainer {
+            margin-top: 20px;
+        }
+
+        .dropbtn {
+            background-color: transparent;
+            color: white;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content div {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        pre {
+            margin: 10px 50px;
+            padding: 10px;
+            border: 1px solid black;
+            font-size: 16px;
+        }
+
+        .pCode{
+            margin-left: 50px;
+            font-size: 20px;
+        }
+
+        .pHead{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .dropdown-content div:hover {background-color: #ddd;}
+
+        .dropdown:hover .dropdown-content {display: block;}
+
+        .dropdown:hover .dropbtn {background-color: transparent;}
+
+        .reference-list {
+            counter-reset: item;
+            margin: 10px 150px
+        }
+        .reference {
+            margin-bottom: 25px;
+            padding-left: 30px;
+            text-indent: -30px;
+            text-align: justify;
+        }
+        .reference:before {
+            content: counter(item) ".";
+            counter-increment: item;
+            padding-right: 10px;
+            color: #2c5282;
+            font-weight: bold;
+        }
+        .author {
+            font-weight: bold;
+        }
+        .title {
+            font-style: italic;
+        }
+        .publisher {
+            font-style: normal;
+        }
+        .electronic {
+            color: #2b6cb0;
+        }
+        .url {
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #4a5568;
+        }
+        .translation {
+            font-size: 0.9em;
+            color: #4a5568;
+        }
+
+        .main-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            color: #555555;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .section-title {
+            color: #555555;
+            border-bottom: 2px solid #04aa6d;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            font-weight: 600;
+        }
+        .subsection-title {
+            color: #04aa6d;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .command-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .command-item {
+            margin-bottom: 12px;
+            padding: 12px 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-left: 4px solid #04aa6d;
+        }
+        .command-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .command {
+            color: #04aa6d;
+            font-weight: bold;
+            font-family: Consolas, monospace;
+            padding: 2px 5px;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+        }
+
+        .about-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            color: #555555;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .about-title {
+            color: #555555;
+            border-bottom: 2px solid #04aa6d;
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-weight: 600;
+        }
+        .about-text {
+            margin-bottom: 12px;
+            padding: 0;
+        }
+        .about-highlight {
+            color: #04aa6d;
+            font-weight: bold;
+            padding: 2px 4px;
+            border-radius: 3px;
+            background-color: #f0f0f0;
+        }
+
+        .grammar-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            color: #555555;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .grammar-title {
+            color: #555555;
+            border-bottom: 2px solid #04aa6d;
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-weight: 600;
+        }
+
+        .grammar-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .production-rule {
+            font-family: Consolas, monospace;
+            padding: 8px 15px;
+            margin-bottom: 8px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #04aa6d;
+            border-radius: 4px;
+        }
+
+        .terminal {
+            color: #04aa6d;
+            font-weight: bold;
+        }
+
+        .non-terminal {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .grammar-definition {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+
+        .definition-text {
+            margin-bottom: 15px;
+        }
+
+        .definition-list {
+            padding-left: 20px;
+        }
+
+        .definition-term {
+            margin-bottom: 8px;
+            font-family: Consolas, monospace;
+        }
+
+        .grammar-type {
+            font-weight: 600;
+            color: #04aa6d;
+        }
+
+        .document-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .document-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #04aa6d;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .document-description {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: #2980b9;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .section-text {
+            margin-bottom: 20px;
+        }
+
+        .code-inline {
+            font-family: Consolas, monospace;
+            color: #d63384;
+            background-color: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .code-block {
+            background-color: #f8f9fa;
+            border-left: 4px solid #04aa6d;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: Consolas, monospace;
+            color: #333;
+        }
+
+        .examples-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .example-item {
+            font-family: Consolas, monospace;
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+            border-left: 3px solid #6f42c1;
+            border-radius: 3px;
+        }
+
+        .test-cases {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 25px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .test-cases-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #04aa6d;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .test-case {
+            margin: 20px 0;
+        }
+
+        .case-title {
+            color: #04aa6d;
+            margin-bottom: 10px;
+        }
+
+        .input-code {
+            font-family: Consolas, monospace;
+            background-color: #f0f0f0;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .output-errors {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 3px solid #e74c3c;
+        }
+
+        .error-message {
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .error-location {
+            color: #555;
+            font-weight: 500;
+            display: inline-block;
+            min-width: 150px;
+        }
+
+        .error-suggestion {
+            color: #04aa6d;
+            font-style: italic;
+        }
+
+        .case-divider {
+            height: 1px;
+            background-color: #ddd;
+            margin: 25px 0;
+        }
+
+        .grammar-analysis {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 25px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .analysis-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #04aa6d;
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .analysis-description {
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .math-notation {
+            font-family: 'Consolas', monospace;
+            color: #9b59b6;
+            font-weight: 500;
+        }
+
+        .grammar-type {
+            color: #04aa6d;
+            font-weight: 600;
+        }
+
+        .graph-wrapper {
+            margin: 25px 0;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            padding: 15px;
+            background-color: #f8f9fa;
+        }
+
+        .graph-image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .graph-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .graph-legend {
+            background-color: white;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .line-style {
+            width: 40px;
+            height: 2px;
+            margin-right: 10px;
+        }
+
+        .solid {
+            background-color: #04aa6d;
+        }
+
+        .dashed {
+            background: repeating-linear-gradient(to right, #e74c3c, #e74c3c 3px, transparent 3px, transparent 6px);
+        }
+
+        .legend-label {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .analysis-summary {
+            font-style: italic;
+            color: #2980b9;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .diagnostics-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .diagnostics-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .recursive-descent,
+        .error-handling,
+        .correction-methods,
+        .implementation-details,
+        .production-example,
+        .recursive-example {
+            margin-bottom: 15px;
+        }
+
+        .production-rule {
+            font-family: Consolas, monospace;
+            padding: 8px 12px;
+            margin: 10px 0;
+            background-color: #f5f5f5;
+            border-left: 3px solid #04aa6d;
+        }
+
+        .non-terminal {
+            color: #2980b9;
+            font-weight: 600;
+        }
+
+        .terminal {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+
+        .method-image {
+            max-width: 100%;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+        }
+
+        .correction-list {
+            margin-left: 20px;
+            padding-left: 15px;
+        }
+
+        .correction-list li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="diagnostics-container">
+    <p class="diagnostics-title">Диагностика и нейтрализация ошибок</p>
+    <div class="diagnostics-content">
+        Исходная строка разбивается на токены, соответствующие ключевым словам: int, void, char, " ", (, ), и т.д;
+        Реализован рекурсивный спуск:
+        <div class="recursive-descent">
+            Основная идея этого метода состоит в том, что каждому нетерминалу грамматики ставится в соответствие определенная программная единица, процедура или функция, которая распознает цепочку, порождаемую этим нетерминалом. Такие процедуры (функции) вызываются
+            в соответствии с правилами грамматики, причем иногда вызывают
+            сами себя рекурсивно. Следовательно, языком реализации этого метода может быть лишь такой язык, который допускает рекурсию.
+        </div>
+        <p class="error-handling">
+            Если же была встречена ошибка, то она нейтрализуется с помощью метода Айронса - по контексту без возврата отбрасываются литеры, которые привели к тупиковой ситуации (когда продолжение
+            анализа по грамматике невозможно), и продолжается разбор c помощью рекурсивного спуска
+        </p>
+        <p class="correction-methods">
+            Удалить символы – значит вызвать текущий метод для следующего токена. Добавить символы – вызвать следующий метод для текущего токена. Заменить символы – вызвать следующий метод для следующего токена.
+        </p>
+        <p class="implementation-details">
+            Следуя методу рекурсивного спуска, все нетерминалы грамматики G[&lt;C&gt;] обозначим своими процедурами, несущими ту же
+            аббревиатуру, что и нетерминалы.
+        <p class="production-example">
+            Для удобства в программной реализации абревиатуры процедур были названы обширнее, но соответсвуют продукциям и нетерминалам
+        <div class="production-rule">
+            <span class="non-terminal">&lt;A&gt;</span> → <span class="terminal">type</span><span class="non-terminal">&lt;P&gt;</span>
+        </div>
+        <div class="production-rule">
+            <span class="non-terminal">&lt;P&gt;</span> → <span class="terminal">" "</span><span class="non-terminal">&lt;T&gt;</span>
+        </div>
+        </p>
+        <img src="../Styles/IMG/image_2025-04-09_10-58-02.png" class="method-image">
+        <p class="recursive-example">
+            По рекурсивному спуску, если входная лексема корректная, то мы по рекурсивному спуску идем дальше в
+        <div class="production-rule">
+            <span class="non-terminal">&lt;P&gt;</span> → <span class="terminal">" "</span><span class="non-terminal">&lt;T&gt;</span>
+        </div> (в программной реализации - переход в spaceAfterArgType)
+        Иначе, методом Айнорнса мы отбрасываем лексему и продолжаем разбор дальше с помощью рекурсивного спуска, решить ошибку мы можем тремя способами:
+        <ul class="correction-list">
+            <li>Удалить - значит вызвать текущий метод для следующего токена</li>
+            <li>Добавить - вызвать следующий метод для текущего токена</li>
+            <li>Заменить - вызвать следующий метод для следующего токена</li>
+        </ul>
+        </p>
+        </p>
+    </div>
+</div>
+</body>
+</html>

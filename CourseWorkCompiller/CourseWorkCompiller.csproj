@@ -73,6 +73,18 @@
       <Resource Include="Styles\IMG\saveFile.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
+      <None Remove="Styles\IMG\diagram.drawio.png" />
+      <Resource Include="Styles\IMG\diagram.drawio.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\photo_2025-04-09_10-29-10.jpg" />
+      <Resource Include="Styles\IMG\photo_2025-04-09_10-29-10.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Styles\IMG\image_2025-04-09_10-58-02.png" />
+      <Resource Include="Styles\IMG\image_2025-04-09_10-58-02.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
     <ItemGroup>
